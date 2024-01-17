@@ -35,6 +35,14 @@ func arrays(writer http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(writer, "***要素が5個の配列を定義***")
 	arr1 := [5]int{2, 4, 6, 8, 10}
 	fmt.Fprintln(writer, arr1)
+
+	fmt.Fprintln(writer, "\n***要素5個で定義した配列に3つの要素しか定義しないとどうなる？***")
+	arr2 := [5]int{1, 3, 5}
+	fmt.Fprintln(writer, arr2)
+
+	fmt.Fprintln(writer, "\n***要素の値は変更可？***")
+	arr2[4] = 99
+	fmt.Fprintln(writer, arr2)
 }
 
 func main() {
