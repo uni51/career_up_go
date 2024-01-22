@@ -43,6 +43,38 @@ func arrays(writer http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(writer, "\n***要素の値は変更可？***")
 	arr2[4] = 99
 	fmt.Fprintln(writer, arr2)
+
+	fmt.Fprintln(writer, "\n***配列の一部を参照するスライス***")
+	sl1 := arr1[1:3]
+	sl2 := arr2[3:]
+	fmt.Fprintln(writer, sl1)
+	fmt.Fprintln(writer, sl2)
+
+	fmt.Fprintln(writer, "\n***スライスの値を変更するとどうなる？***")
+	sl1[1] = 36
+	fmt.Fprintln(writer, sl1)
+	fmt.Fprintln(writer, arr1) // 元の配列の値も変わる
+}
+
+func slices(writer http.ResponseWriter, req *http.Request) {
+	sl := []int{30, 45, 60, 90, 180}
+
+	var rad_v float64 //初期値を渡さず、型だけで変数を定義
+
+	for _, v := range sl { //インデックスと値を取得
+		rad_v = float64(v) * math.Pi / 180.0 //変数rad_vの値を置き換えていく
+		fmt.Fprintf(writer, "sin%d°は %.3f\n\n",
+			v, math.Sin(rad_v)) //そのたびに出力する
+
+	}
+
+	fmt.Fprintln(writer, "\n***スライスなら要素を増やせる***")
+	sl = append(sl, 225, 275, 360)
+	fmt.Fprintln(writer, sl)
+
+	fmt.Fprintln(writer, "\n***スライスの一部を参照するスライス***")
+	sl_sl := sl[2:5]
+	fmt.Fprintln(writer, sl_sl)
 }
 
 func main() {
@@ -50,5 +82,7 @@ func main() {
 	http.HandleFunc("/algebra", algebra)
 	http.HandleFunc("/math", mathfuncs)
 	http.HandleFunc("/arrays", arrays)
+	http.HandleFunc("/slices", slices)
+
 	http.ListenAndServe(":8090", nil)
 }
