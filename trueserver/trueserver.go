@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"trueserver/data"
 	"trueserver/functions"
 )
 
@@ -50,10 +51,27 @@ func with_slices(writer http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(writer, sl_1)
 }
 
+func with_structs(writer http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(writer, "*** 構造体 ***")
+
+	members := []data.Member{
+		data.Member{"ゆみこ", 56, 1.24},
+		data.Member{"トシオ", 44, 0.98},
+		data.Member{"かおる", 70, 1.02},
+	}
+
+	fmt.Fprintln(writer, "*** 構造体を用いた関数 ***")
+	fmt.Fprintln(writer, functions.DescribeAllMembers(members))
+
+	fmt.Fprintln(writer, "*** 構造体を戻す関数 ***")
+	fmt.Fprintln(writer, functions.DescribeMaxPointMember(members))
+}
+
 func main() {
 	http.HandleFunc("/add", add)
 	http.HandleFunc("/sub", sub)
 	http.HandleFunc("/with_slices", with_slices)
+	http.HandleFunc("/with_structs", with_structs)
 
 	http.ListenAndServe(":8090", nil)
 }
