@@ -52,3 +52,27 @@ func DescribeMaxPointMember(members []data.Member) string {
 
 	return s_string
 }
+
+func DescribeMockStruct(mockmemory []int, mockaddress int) string {
+	s_string := fmt.Sprintf("名前は %d さん、", mockmemory[mockaddress])
+	s_string += fmt.Sprintf("年齢は %d 歳、", mockmemory[mockaddress+1])
+	s_string += fmt.Sprintf("身長は %d cm", mockmemory[mockaddress+2])
+	return s_string
+}
+
+func UpdateOrCopy(a int, b *int) int {
+	a += 3
+	*b += 3
+	return a
+}
+
+func AddPointAndReport(member **data.Member, p int) string {
+
+	data.AddPoint(member, p)
+
+	s_string := "<<得点アップサービス>>\n"
+	s_string += fmt.Sprintf("%s さんのポイント %d 点アップ\n", (**member).Name, p)
+	s_string += "\n"
+
+	return s_string
+}

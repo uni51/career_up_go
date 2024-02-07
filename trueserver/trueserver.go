@@ -65,6 +65,30 @@ func with_structs(writer http.ResponseWriter, req *http.Request) {
 
 	fmt.Fprintln(writer, "*** 構造体を戻す関数 ***")
 	fmt.Fprintln(writer, functions.DescribeMaxPointMember(members))
+
+	fmt.Fprintln(writer, "*** 構造体のポインターを用いる関数 ***")
+
+	member_add := &members[0]
+
+	fmt.Fprintln(writer, functions.AddPointAndReport(&member_add, 12))
+	fmt.Fprintln(writer, functions.Describe(members[0]))
+}
+
+func with_pointers(writer http.ResponseWriter, req *http.Request) {
+	mockmemory := []int{325, 14, 160, 440, 16, 175}
+
+	fmt.Fprintln(writer, "\n<<アドレス[0]指定>>")
+	fmt.Fprintln(writer, functions.DescribeMockStruct(mockmemory, 0))
+
+	fmt.Fprintln(writer, "\n<<アドレス[3]指定>>")
+	fmt.Fprintln(writer, functions.DescribeMockStruct(mockmemory, 3))
+
+	fmt.Fprintln(writer, "\n*** ポインタを使う意味 ***")
+	a, b := 10, 10
+
+	aa := functions.UpdateOrCopy(a, &b)
+
+	fmt.Fprintf(writer, "a=%d, b=%d, aa=%d", a, b, aa)
 }
 
 func main() {
@@ -72,6 +96,7 @@ func main() {
 	http.HandleFunc("/sub", sub)
 	http.HandleFunc("/with_slices", with_slices)
 	http.HandleFunc("/with_structs", with_structs)
+	http.HandleFunc("/with_pointers", with_pointers)
 
 	http.ListenAndServe(":8090", nil)
 }

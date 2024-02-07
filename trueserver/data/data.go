@@ -29,3 +29,7 @@ func MaxPointMember(members []Member) Member {
 
 	return mpm
 }
+
+func AddPoint(member **Member, p int) {
+	(**member).Point += p
+}
