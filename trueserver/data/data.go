@@ -33,3 +33,8 @@ func MaxPointMember(members []Member) Member {
 func AddPoint(member **Member, p int) {
 	(**member).Point += p
 }
+
+func CreateFriendMember(member Member, name string) Member {
+	member.Name = name
+	return member
+}

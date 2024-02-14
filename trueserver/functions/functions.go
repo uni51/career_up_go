@@ -76,3 +76,12 @@ func AddPointAndReport(member **data.Member, p int) string {
 
 	return s_string
 }
+
+func CreateFriendAndReport(member data.Member, friend_name string) (data.Member, string) {
+	friend := data.CreateFriendMember(member, friend_name)
+
+	s_string := fmt.Sprintf("%s さんの紹介で、お友達 %s さんが加わりました", member.Name, friend_name)
+	s_string += "\n"
+
+	return friend, s_string
+}

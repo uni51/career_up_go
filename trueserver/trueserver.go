@@ -66,12 +66,19 @@ func with_structs(writer http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(writer, "*** 構造体を戻す関数 ***")
 	fmt.Fprintln(writer, functions.DescribeMaxPointMember(members))
 
-	fmt.Fprintln(writer, "*** 構造体のポインターを用いる関数 ***")
+	fmt.Fprintln(writer, "*** 構造体のポインタを用いる関数 ***")
 
 	member_add := &members[0]
 
 	fmt.Fprintln(writer, functions.AddPointAndReport(&member_add, 12))
 	fmt.Fprintln(writer, functions.Describe(members[0]))
+
+	fmt.Fprintln(writer, "*** 構造体のコピーを返す関数 ***")
+	friend, s_string := functions.CreateFriendAndReport(members[1], "エミコ")
+	fmt.Fprintln(writer, s_string)
+
+	fmt.Fprintln(writer, functions.Describe(friend))
+	fmt.Fprintln(writer, functions.Describe(members[1]))
 }
 
 func with_pointers(writer http.ResponseWriter, req *http.Request) {
