@@ -12,8 +12,16 @@ func Effective(m Member) float64 {
 	return float64(m.Point) * m.Coeff
 }
 
-func Describe(m Member) string {
-	return fmt.Sprintf("%s さんのポイントは %d 点、有効ポイントは %.2f 点です", m.Name, m.Point, Effective(m))
+func (member Member) EffectiveM() float64 {
+	return float64(member.Point) * member.Coeff
+}
+
+func Describe(member Member) string {
+	return fmt.Sprintf("%s さんのポイントは %d 点、有効ポイントは %.2f 点です", member.Name, member.Point, Effective(member))
+}
+
+func (member Member) DescribeM() string {
+	return fmt.Sprintf("%s さんのポイントは %d 点、有効ポイントは %.2f 点です", member.Name, member.Point, member.EffectiveM())
 }
 
 // 有効ポイントが最大のメンバーを返す

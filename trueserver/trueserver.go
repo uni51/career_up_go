@@ -79,6 +79,10 @@ func with_structs(writer http.ResponseWriter, req *http.Request) {
 
 	fmt.Fprintln(writer, functions.Describe(friend))
 	fmt.Fprintln(writer, functions.Describe(members[1]))
+
+	members = append(members, friend)
+	fmt.Fprintln(writer, "*** メソッドの使用 ***")
+	fmt.Fprintln(writer, functions.DescribeM_AllMembers(members))
 }
 
 func with_pointers(writer http.ResponseWriter, req *http.Request) {

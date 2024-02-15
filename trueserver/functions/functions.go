@@ -42,6 +42,15 @@ func DescribeAllMembers(members []data.Member) string {
 	return s_string
 }
 
+func DescribeM_AllMembers(members []data.Member) string {
+	s_string := "メソッドを使って書き出しても\n"
+	for _, v := range members {
+		s_string += v.DescribeM()
+		s_string += "\n"
+	}
+	return s_string
+}
+
 func DescribeMaxPointMember(members []data.Member) string {
 	s_string := "有効ポイント最大の方は\n"
 
