@@ -103,3 +103,15 @@ func CreateFriendAndReport(member data.Member, friend_name string) (data.Member,
 
 	return friend, s_string
 }
+
+func ShowFractions(fractions []data.Fraction) string {
+	s_string := "スケール的には\n"
+
+	for _, v := range fractions {
+		s_string += fmt.Sprintf("%s倍か", v.Value())
+		s_string += "\n"
+	}
+
+	s_string += "というところでしょうか\n"
+	return s_string
+}

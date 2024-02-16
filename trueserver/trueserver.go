@@ -113,6 +113,14 @@ func with_methods(writer http.ResponseWriter, req *http.Request) {
 	marco = marco.Travel(2, 3).Travel(12, 24).Travel(45, 78).Goal()
 
 	fmt.Fprintln(writer, marco.Record)
+
+	fmt.Println(writer, "\n*** インターフェースの練習 ***")
+
+	fractions := []data.Fraction{
+		data.Half(1.5), data.Full(2), data.Half(2.5), data.Full(3), data.Half(3.5),
+	}
+
+	fmt.Fprintln(writer, functions.ShowFractions(fractions))
 }
 
 func main() {

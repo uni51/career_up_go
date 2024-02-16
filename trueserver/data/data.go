@@ -15,6 +15,22 @@ type Traveller struct {
 	Record string
 }
 
+type Half float64
+
+type Full int
+
+type Fraction interface {
+	Value() string
+}
+
+func (h Half) Value() string {
+	return fmt.Sprintf("%.1f", float64(h))
+}
+
+func (f Full) Value() string {
+	return fmt.Sprintf("%d", int(f))
+}
+
 func CreateTraveller(name string, x int, y int) Traveller {
 	t := Traveller{}
 	t.Name = name
