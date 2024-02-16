@@ -81,7 +81,16 @@ func AddPointAndReport(member **data.Member, p int) string {
 
 	s_string := "<<得点アップサービス>>\n"
 	s_string += fmt.Sprintf("%s さんのポイント %d 点アップ\n", (**member).Name, p)
-	s_string += "\n"
+
+	return s_string
+}
+
+func AddPointMAndReport(member *data.Member, p int) string {
+
+	member.AddPointM(p)
+
+	s_string := "<<メソッドによる得点アップサービス>>\n"
+	s_string += fmt.Sprintf("%s さんのポイント %d 点アップ\n", member.Name, p)
 
 	return s_string
 }

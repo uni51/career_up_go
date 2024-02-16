@@ -83,6 +83,10 @@ func with_structs(writer http.ResponseWriter, req *http.Request) {
 	members = append(members, friend)
 	fmt.Fprintln(writer, "*** メソッドの使用 ***")
 	fmt.Fprintln(writer, functions.DescribeM_AllMembers(members))
+
+	fmt.Fprintln(writer, "\n<<お友達紹介特典>>")
+	fmt.Fprintln(writer, functions.AddPointMAndReport(&members[1], 20))
+	fmt.Fprintln(writer, functions.Describe(members[1]))
 }
 
 func with_pointers(writer http.ResponseWriter, req *http.Request) {
@@ -102,12 +106,22 @@ func with_pointers(writer http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(writer, "a=%d, b=%d, aa=%d", a, b, aa)
 }
 
+func with_methods(writer http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(writer, "\n*** 連続処理 ***")
+
+	marco := data.CreateTraveller("マルコ", 0, 0)
+	marco = marco.Travel(2, 3).Travel(12, 24).Travel(45, 78).Goal()
+
+	fmt.Fprintln(writer, marco.Record)
+}
+
 func main() {
 	http.HandleFunc("/add", add)
 	http.HandleFunc("/sub", sub)
 	http.HandleFunc("/with_slices", with_slices)
 	http.HandleFunc("/with_structs", with_structs)
 	http.HandleFunc("/with_pointers", with_pointers)
+	http.HandleFunc("/with_methods", with_methods)
 
 	http.ListenAndServe(":8090", nil)
 }

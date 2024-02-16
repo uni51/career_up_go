@@ -8,6 +8,34 @@ type Member struct {
 	Coeff float64 // 係数
 }
 
+type Traveller struct {
+	Name   string
+	X      int
+	Y      int
+	Record string
+}
+
+func CreateTraveller(name string, x int, y int) Traveller {
+	t := Traveller{}
+	t.Name = name
+	t.X = x
+	t.Y = y
+	t.Record = fmt.Sprintf("%s は (%d, %d) 地点よりスタート\n", t.Name, t.X, t.Y)
+	return t
+}
+
+func (t Traveller) Travel(x int, y int) Traveller {
+	t.X = x
+	t.Y = y
+	t.Record += fmt.Sprintf("(%d, %d) へ移動\n", t.X, t.Y)
+	return t
+}
+
+func (t Traveller) Goal() Traveller {
+	t.Record += "到着です\n"
+	return t
+}
+
 func Effective(m Member) float64 {
 	return float64(m.Point) * m.Coeff
 }
@@ -40,6 +68,10 @@ func MaxPointMember(members []Member) Member {
 
 func AddPoint(member **Member, p int) {
 	(**member).Point += p
+}
+
+func (member *Member) AddPointM(p int) {
+	member.Point += p
 }
 
 func CreateFriendMember(member Member, name string) Member {
