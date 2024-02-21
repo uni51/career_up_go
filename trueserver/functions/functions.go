@@ -115,3 +115,14 @@ func ShowFractions(fractions []data.Fraction) string {
 	s_string += "というところでしょうか\n"
 	return s_string
 }
+
+func CountAll(counters []data.Counter) string {
+
+	s_string := "<<data.Counterインターフェース>>\n"
+
+	for _, v := range counters {
+		s_string += v.DoCount()
+		s_string += "\n"
+	}
+	return s_string
+}

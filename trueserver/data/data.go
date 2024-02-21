@@ -23,6 +23,39 @@ type Fraction interface {
 	Value() string
 }
 
+type Counter interface {
+	DoCount() string
+}
+
+type CharCounter struct {
+	Content string
+}
+
+type DigitCounter struct {
+	Content int
+}
+
+func (counter CharCounter) DoCount() string {
+	content := counter.Content                // (1) 処理する値を取り出す
+	s_string := fmt.Sprintf("「%s」は", content) // (2) まず、内容を表示する
+
+	// (3) 文字列をUnicode記号のスライスに変換して、その長さを取得
+	s_string += fmt.Sprintf(" %d 文字です", len([]rune(content)))
+
+	return s_string
+}
+
+func (counter DigitCounter) DoCount() string {
+	content := counter.Content
+	content_str := fmt.Sprintf("%d", content) // (1) 整数を文字列に変換
+	s_string := fmt.Sprintf("「%d」は", content) // (2) 何の桁数か明示
+
+	// (3) 文字列をUnicode記号のスライスに変換して、その長さを取得
+	s_string += fmt.Sprintf(" %d 桁です", len([]rune(content_str)))
+
+	return s_string
+}
+
 func (h Half) Value() string {
 	return fmt.Sprintf("%.1f", float64(h))
 }

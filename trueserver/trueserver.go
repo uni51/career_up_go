@@ -121,6 +121,17 @@ func with_methods(writer http.ResponseWriter, req *http.Request) {
 	}
 
 	fmt.Fprintln(writer, functions.ShowFractions(fractions))
+
+	fmt.Println(writer, "\n*** もっとそれらしいインターフェース ***")
+	counters := []data.Counter{
+		data.CharCounter{Content: "Let's count!"},
+		data.CharCounter{Content: "一二三四五六七八九"},
+		data.DigitCounter{Content: 2500},
+		data.DigitCounter{Content: 1963061},
+		data.CharCounter{Content: "以上！"},
+	}
+
+	fmt.Fprintln(writer, functions.CountAll(counters))
 }
 
 func main() {
