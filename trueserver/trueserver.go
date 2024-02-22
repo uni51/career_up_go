@@ -132,6 +132,22 @@ func with_methods(writer http.ResponseWriter, req *http.Request) {
 	}
 
 	fmt.Fprintln(writer, functions.CountAll(counters))
+
+	fmt.Println(writer, "\n*** ポインタもインターフェースを実装できる ***")
+
+	var reader data.MockReader
+	reader = &data.StringReader{}
+	reader.Read("2023年1月1日")
+	reader.Read("Goのインターフェースを学習した")
+	reader.Read("難しかった")
+	fmt.Fprintln(writer, reader.Write())
+
+	reader = &data.IntReader{}
+	reader.Read("21")
+	reader.Read("abc")
+	reader.Read("75")
+	reader.Read("へ3")
+	fmt.Fprintln(writer, reader.Write())
 }
 
 func main() {

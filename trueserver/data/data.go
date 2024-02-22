@@ -35,6 +35,54 @@ type DigitCounter struct {
 	Content int
 }
 
+type MockReader interface {
+	Read(content string)
+	Write() string
+}
+
+type StringReader struct {
+	Memory string
+}
+
+type IntReader struct {
+	Memory []int
+}
+
+func (reader *StringReader) Read(content string) {
+	reader.Memory += content
+	reader.Memory += "\n"
+}
+
+func (reader *IntReader) Read(content string) {
+	digits := "0123456789"
+	for _, v := range content {
+		for i, s := range digits {
+			if v == s {
+				reader.Memory = append(reader.Memory, i)
+				break
+			}
+		}
+	}
+}
+
+func (reader StringReader) Write() string {
+	s_string := "StringReaderインスタンスの中身は\n"
+	s_string += "「"
+	s_string += reader.Memory
+	s_string += "」"
+	return s_string
+}
+
+func (reader IntReader) Write() string {
+	s_string := "IntReaderインスタンスの中身は\n"
+	s_string += "["
+	for _, v := range reader.Memory {
+		s_string += fmt.Sprintf("%d ", v)
+	}
+	s_string += "]"
+	return s_string
+}
+
 func (counter CharCounter) DoCount() string {
 	content := counter.Content                // (1) 処理する値を取り出す
 	s_string := fmt.Sprintf("「%s」は", content) // (2) まず、内容を表示する
