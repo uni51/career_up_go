@@ -1,6 +1,9 @@
 package data
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Member struct {
 	Name  string
@@ -81,6 +84,17 @@ func (reader IntReader) Write() string {
 	}
 	s_string += "]"
 	return s_string
+}
+
+func (reader IntReader) Render2Int() int {
+	sum := 0
+	memory := reader.Memory
+	lm := len(memory)
+	for i := 0; i < lm; i++ {
+		mag := math.Pow10(lm - i)
+		sum += memory[i] * int(mag)
+	}
+	return sum / 10
 }
 
 func (counter CharCounter) DoCount() string {

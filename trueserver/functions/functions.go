@@ -126,3 +126,10 @@ func CountAll(counters []data.Counter) string {
 	}
 	return s_string
 }
+
+func IntReader2Int(reader data.IntReader) string {
+	s_string := "IntReaderから構成される整数は\n"
+	s_string += fmt.Sprintf("%d です", reader.Render2Int())
+	s_string += "\n"
+	return s_string
+}

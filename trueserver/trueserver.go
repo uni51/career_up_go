@@ -148,6 +148,11 @@ func with_methods(writer http.ResponseWriter, req *http.Request) {
 	reader.Read("75")
 	reader.Read("へ3")
 	fmt.Fprintln(writer, reader.Write())
+
+	fmt.Fprintln(writer, "\n*** 実装しないメソッドを使う ***")
+
+	int_reader := reader.(*data.IntReader)
+	fmt.Fprintln(writer, functions.IntReader2Int(*int_reader))
 }
 
 func main() {
