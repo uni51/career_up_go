@@ -155,6 +155,14 @@ func with_methods(writer http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(writer, functions.IntReader2Int(*int_reader))
 }
 
+func flows(writer http.ResponseWriter, req *http.Request) {
+
+	fmt.Fprintln(writer, "*** while文に相当するfor ***")
+	fmt.Fprintln(writer, functions.While10(6))
+	fmt.Fprintln(writer, functions.While10(13))
+	fmt.Fprintln(writer, functions.While10(10))
+}
+
 func main() {
 	http.HandleFunc("/add", add)
 	http.HandleFunc("/sub", sub)
@@ -162,6 +170,7 @@ func main() {
 	http.HandleFunc("/with_structs", with_structs)
 	http.HandleFunc("/with_pointers", with_pointers)
 	http.HandleFunc("/with_methods", with_methods)
+	http.HandleFunc("/flows", flows)
 
 	http.ListenAndServe(":8090", nil)
 }

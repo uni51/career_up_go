@@ -133,3 +133,23 @@ func IntReader2Int(reader data.IntReader) string {
 	s_string += "\n"
 	return s_string
 }
+
+func While10(num int) string {
+	s_string := fmt.Sprintf(("最初は %d です\n"), num)
+
+	if num < 10 {
+		for num < 10 {
+			num++
+			s_string += fmt.Sprintf("%d \n", num)
+		}
+	} else if num > 10 {
+		for num > 10 {
+			num--
+			s_string += fmt.Sprintf("%d \n", num)
+		}
+	} else {
+		s_string += fmt.Sprintf("今も %d \n", num)
+	}
+
+	return s_string
+}
