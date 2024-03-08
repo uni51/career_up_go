@@ -163,3 +163,24 @@ func Foever(limit int) string {
 		}
 	}
 }
+
+func Div3(num int) string {
+	s_string := "3は"
+	switch num {
+	case 0:
+		s_string += "0では割れません"
+	case 1:
+		s_string += "1で割る意味はあまりない"
+	case 2:
+		s_string += "2で割ると1と1/2"
+	case 3:
+		s_string += "3で割るとちょうど1"
+	default:
+		if num%3 == 0 {
+			s_string += fmt.Sprintf("%d で割ると 1/%d", num, num/3)
+		} else {
+			s_string += fmt.Sprintf("%d で割ると 3/%d", num, num)
+		}
+	}
+	return s_string
+}
