@@ -153,3 +153,13 @@ func While10(num int) string {
 
 	return s_string
 }
+
+func Foever(limit int) string {
+	i := 0
+	for {
+		i++
+		if i > limit {
+			return fmt.Sprintf("%d でやめました", i)
+		}
+	}
+}

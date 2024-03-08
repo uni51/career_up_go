@@ -161,6 +161,10 @@ func flows(writer http.ResponseWriter, req *http.Request) {
 	fmt.Fprintln(writer, functions.While10(6))
 	fmt.Fprintln(writer, functions.While10(13))
 	fmt.Fprintln(writer, functions.While10(10))
+
+	fmt.Fprintln(writer, "*** forを用いた無限ループ ***")
+	fmt.Fprintln(writer, functions.Foever(3))
+	fmt.Fprintln(writer, functions.Foever(10000))
 }
 
 func main() {
